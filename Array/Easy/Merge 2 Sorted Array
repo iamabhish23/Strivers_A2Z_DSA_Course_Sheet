@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public static List<Integer> sortedArray(int[] a, int[] b) {
+        ArrayList<Integer> union = new ArrayList<>();
+        
+        int i = 0;
+        int j = 0;
+        Integer prev = null;
+        
+        while (i < a.length && j < b.length) {
+            int current;
+            if (a[i] < b[j]) {
+                current = a[i];
+                i++;
+            } else if (a[i] > b[j]) {
+                current = b[j];  
+                j++;
+            } else {
+                current = a[i];
+                i++;
+                j++;
+            }
+            
+            if (prev == null || current != prev) {
+                union.add(current);
+                prev = current;
+            }
+        }
+        
+        while (i < a.length) {
+            if (a[i] != prev) {
+                union.add(a[i]);
+                prev = a[i];
+            }
+            i++;
+        }
+        
+        while (j < b.length) {
+            if (b[j] != prev) {  
+                union.add(b[j]);
+                prev = b[j];
+            }
+            j++;
+        }
+        
+        return union;
+    }
+}
